@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pack EVFC · FPA | Édumédiapole</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+
+    /* ════════════════════════════════════════
+       TOKENS — MODE CLAIR
+    ════════════════════════════════════════ */
+    :root {
+      /* Marque Édumédiapole */
+      --bleu:       #002455;
+      --bleu-med:   #1356A0;
+      --bleu-nuit:  #061A33;
+      --rouge:      #F0322C;
+      --rouge-fonce:#C02020;
+      --bleu-pale:  #E8F0FA;
+      --fond:       #FFFFFF;
+      --fond-alt:   #F3F5F7;
+      --surface:    #FFFFFF;
+      --surface-2:  #F3F5F7;
+      --texte:      #1A1A2E;
+      --texte-2:    #4A5A72;
+      --bordure:    #D8DEE6;
+      --nav-bg:     #002455;
+      --ombre:      0 2px 16px rgba(0,36,85,.08);
+      --ombre-md:   0 6px 28px rgba(0,36,85,.13);
+      --radius:     12px;
+      --radius-sm:  7px;
+
+      /* ── Code couleur EVFC ── */
+      --evfc-e:   #1A5CC8;   /* Écouter — bleu     */
+      --evfc-v:   #1A7A45;   /* Voir    — vert     */
+      --evfc-f:   #BF5B00;   /* Faire   — orange   */
+      --evfc-c:   #6B2FA0;   /* Consolider — violet*/
+      /* variantes texte (lisibles sur fond clair) */
+      --evfc-e-t: #1A5CC8;
+      --evfc-v-t: #1A7A45;
+      --evfc-f-t: #BF5B00;
+      --evfc-c-t: #6B2FA0;
+    }
+
+    /* ════════════════════════════════════════
+       TOKENS — MODE SOMBRE
+    ════════════════════════════════════════ */
+    [data-theme="dark"] {
+      --bleu:       #5B9FEF;
+      --bleu-med:   #7AB4F5;
+      --bleu-nuit:  #061A33;
+      --rouge:      #F0322C;
+      --rouge-fonce:#D42B26;
+      --bleu-pale:  #0D2B50;
+      --fond:       #061A33;
+      --fond-alt:   #091E38;
+      --surface:    #0D2B50;
+      --surface-2:  #0B2444;
+      --texte:      #E8F0FA;
+      --texte-2:    #7A9DB8;
+      --bordure:    #1A3A5C;
+      --nav-bg:     #040D1A;
+      --ombre:      0 2px 16px rgba(0,0,0,.35);
+      --ombre-md:   0 6px 28px rgba(0,0,0,.45);
+
+      /* variantes texte EVFC en mode sombre (plus lumineuses) */
+      --evfc-e-t: #6BA4F0;
+      --evfc-v-t: #4DC97A;
+      --evfc-f-t: #F5A030;
+      --evfc-c-t: #C090F5;
+    }
+
+    /* ════════════════════════════════════════
+       BASE
+    ════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 16px;
+      color: var(--texte);
+      background: var(--fond);
+      line-height: 1.7;
+      transition: background .3s, color .3s;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Poppins', system-ui, sans-serif; line-height: 1.2; }
+
+    a { color: var(--bleu); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Spans de phase EVFC (inline dans le texte) ── */
+    .ph-e { color: var(--evfc-e-t); font-weight: 600; }
+    .ph-v { color: var(--evfc-v-t); font-weight: 600; }
+    .ph-f { color: var(--evfc-f-t); font-weight: 600; }
+    .ph-c { color: var(--evfc-c-t); font-weight: 600; }
+
+    /* ════════════════════════════════════════
+       NAV
+    ════════════════════════════════════════ */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--nav-bg);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .8rem 2.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+      transition: background .3s;
+    }
+
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+
+    /* Conteneur fond clair pour le logo sur nav sombre */
+    .nav-logo-wrap {
+      background: #fff;
+      border-radius: 8px;
+      padding: 5px 12px;
+      display: flex; align-items: center;
+      transition: opacity .2s;
+    }
+    .nav-logo:hover .nav-logo-wrap { opacity: .88; }
+
+    .nav-logo-img {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+
+    /* Gardé pour le footer */
+    .logo-mark {
+      width: 34px; height: 34px;
+      background: var(--rouge);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800; font-size: 1.1rem; color: #fff;
+      flex-shrink: 0; letter-spacing: -.02em;
+    }
+
+    .logo-text { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: .95rem; color: #fff; }
+    .logo-text span { color: rgba(255,255,255,.55); font-weight: 400; font-size: .82rem; display: block; line-height: 1.1; }
+
+    nav ul { list-style: none; display: flex; gap: 1.8rem; align-items: center; }
+    nav ul a { color: rgba(255,255,255,.75); font-size: .88rem; font-weight: 500; transition: color .2s; }
+    nav ul a:hover { color: #fff; text-decoration: none; }
+
+    .theme-toggle {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 20px; padding: .35rem .75rem;
+      cursor: pointer; display: flex; align-items: center; gap: .45rem;
+      color: rgba(255,255,255,.85); font-size: .8rem; font-weight: 500;
+      transition: background .2s, border-color .2s; white-space: nowrap;
+    }
+    .theme-toggle:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.4); }
+    .theme-toggle svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    .icon-sun  { display: none; }
+    .icon-moon { display: block; }
+    [data-theme="dark"] .icon-sun  { display: block; }
+    [data-theme="dark"] .icon-moon { display: none; }
+
+    /* ════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════ */
+    .hero {
+      background: linear-gradient(135deg, #002455 0%, #061A33 55%, #0A1F40 100%);
+      color: #fff; padding: 5.5rem 2.5rem 4.5rem;
+      text-align: center; position: relative; overflow: hidden;
+    }
+
+    .hero::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: rgba(240,50,44,.08); pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -60px; left: -60px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: rgba(255,255,255,.03); pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(240,50,44,.15);
+      border: 1px solid rgba(240,50,44,.4);
+      color: #FF7B76; font-size: .78rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .35rem 1rem; border-radius: 20px; margin-bottom: 1.6rem;
+    }
+    .hero-tag::before {
+      content: ''; width: 6px; height: 6px;
+      background: #F0322C; border-radius: 50%; display: inline-block;
+    }
+
+    .hero h1 { font-size: clamp(2.1rem, 5.5vw, 3.4rem); font-weight: 800; margin-bottom: 1.1rem; color: #fff; }
+    .hero h1 em { font-style: normal; color: #F0322C; }
+
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,.75); max-width: 600px; margin: 0 auto 2.2rem; }
+
+    /* EVFC acronyme dans le hero — lettres sur fond sombre */
+    .hero-sub .ph-e { color: #6BA4F0; font-weight: 700; }
+    .hero-sub .ph-v { color: #4DC97A; font-weight: 700; }
+    .hero-sub .ph-f { color: #F5A030; font-weight: 700; }
+    .hero-sub .ph-c { color: #C090F5; font-weight: 700; }
+
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .8rem 1.8rem; border-radius: var(--radius-sm);
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .9rem;
+      cursor: pointer; border: none;
+      transition: transform .15s, box-shadow .2s, background .2s;
+      text-decoration: none !important;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--rouge); color: #fff; box-shadow: 0 4px 16px rgba(240,50,44,.4); }
+    .btn-primary:hover { background: var(--rouge-fonce); box-shadow: 0 6px 22px rgba(240,50,44,.5); }
+    .btn-ghost { background: rgba(255,255,255,.1); color: #fff; border: 1.5px solid rgba(255,255,255,.35); }
+    .btn-ghost:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.6); }
+
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 4rem; padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+      position: relative; z-index: 1;
+    }
+
+    .stat-num { font-family: 'Poppins', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--rouge); line-height: 1; }
+    .stat-label { font-size: .78rem; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .07em; margin-top: .2rem; }
+
+    /* Pastilles EVFC dans la stat "4 Phases" */
+    .evfc-dots { display: flex; gap: 4px; justify-content: center; margin: .3rem 0 .1rem; }
+    .evfc-dots span { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+    /* ════════════════════════════════════════
+       SECTIONS COMMUNES
+    ════════════════════════════════════════ */
+    section { padding: 5rem 2.5rem; transition: background .3s; }
+    .section-bg-alt { background: var(--fond-alt); }
+    .section-inner { max-width: 1080px; margin: 0 auto; }
+
+    .section-label { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--rouge); margin-bottom: .5rem; }
+
+    .section-title { font-family: 'Poppins', sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--bleu); margin-bottom: .5rem; }
+    [data-theme="dark"] .section-title { color: var(--texte); }
+
+    .section-sub { color: var(--texte-2); font-size: .97rem; margin-bottom: 2.8rem; max-width: 560px; }
+
+    /* ════════════════════════════════════════
+       MÉTHODE EVFC — cartes de phase
+    ════════════════════════════════════════ */
+    .evfc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+
+    .evfc-card {
+      background: var(--surface); border-radius: var(--radius);
+      padding: 2rem 1.6rem 1.6rem; box-shadow: var(--ombre);
+      border-top: 4px solid transparent;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .evfc-card:hover { transform: translateY(-5px); box-shadow: var(--ombre-md); }
+
+    /* Bordures */
+    .evfc-card.e { border-top-color: var(--evfc-e); }
+    .evfc-card.v { border-top-color: var(--evfc-v); }
+    .evfc-card.f { border-top-color: var(--evfc-f); }
+    .evfc-card.c { border-top-color: var(--evfc-c); }
+
+    .evfc-letter { font-family: 'Poppins', sans-serif; font-size: 2.8rem; font-weight: 800; line-height: 1; margin-bottom: .3rem; }
+
+    /* Lettres (utilisent les vars text qui s'adaptent au mode) */
+    .evfc-card.e .evfc-letter { color: var(--evfc-e-t); }
+    .evfc-card.v .evfc-letter { color: var(--evfc-v-t); }
+    .evfc-card.f .evfc-letter { color: var(--evfc-f-t); }
+    .evfc-card.c .evfc-letter { color: var(--evfc-c-t); }
+
+    .evfc-word { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; color: var(--texte); margin-bottom: .25rem; }
+
+    .evfc-pct { display: inline-block; font-size: .75rem; font-weight: 600; color: #fff; padding: .15rem .55rem; border-radius: 20px; margin-bottom: .8rem; }
+
+    /* Badges % (toujours fond coloré + texte blanc) */
+    .evfc-card.e .evfc-pct { background: var(--evfc-e); }
+    .evfc-card.v .evfc-pct { background: var(--evfc-v); }
+    .evfc-card.f .evfc-pct { background: var(--evfc-f); }
+    .evfc-card.c .evfc-pct { background: var(--evfc-c); }
+
+    .evfc-desc { font-size: .875rem; color: var(--texte-2); }
+
+    /* ════════════════════════════════════════
+       LÉGENDE EVFC (utilisée dans sections modules + chaînes)
+    ════════════════════════════════════════ */
+    .evfc-legend {
+      display: flex; flex-wrap: wrap; gap: .6rem 1.2rem;
+      margin-bottom: 1.8rem;
+      padding: .7rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--bordure);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--ombre);
+      width: fit-content;
+    }
+
+    .legend-item {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .78rem; font-weight: 600; color: var(--texte-2);
+    }
+
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%; display: inline-block; flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════════════
+       MODULES
+    ════════════════════════════════════════ */
+    .modules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1.2rem; }
+
+    .module-card {
+      background: var(--surface); border-radius: var(--radius);
+      box-shadow: var(--ombre); overflow: hidden;
+      border: 1px solid var(--bordure);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .module-card:hover { transform: translateY(-4px); box-shadow: var(--ombre-md); }
+
+    .module-card.featured { grid-column: 1 / -1; display: flex; align-items: stretch; }
+
+    .module-header {
+      padding: 1rem 1.4rem; display: flex; align-items: center; gap: .85rem;
+      background: var(--surface-2); border-bottom: 1px solid var(--bordure);
+    }
+
+    .module-card.featured .module-header {
+      border-bottom: none; border-right: 1px solid var(--bordure);
+      flex-direction: column; justify-content: center;
+      min-width: 180px; padding: 1.6rem;
+    }
+
+    .module-badge {
+      font-family: 'Poppins', sans-serif; font-size: .68rem; font-weight: 700;
+      letter-spacing: .06em; padding: .28rem .7rem;
+      border-radius: var(--radius-sm); white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* Badges marque */
+    .badge-bleu      { background: #002455; color: #fff; }
+    .badge-bleu-med  { background: #1356A0; color: #fff; }
+    .badge-bleu-nuit { background: #061A33; color: #fff; }
+
+    /* Badges EVFC */
+    .badge-evfc-e { background: var(--evfc-e); color: #fff; }
+    .badge-evfc-v { background: var(--evfc-v); color: #fff; }
+    .badge-evfc-f { background: var(--evfc-f); color: #fff; }
+    .badge-evfc-c { background: var(--evfc-c); color: #fff; }
+
+    .module-name { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: .93rem; color: var(--texte); }
+
+    .module-body { padding: 1.2rem 1.4rem; }
+    .module-body p { font-size: .875rem; color: var(--texte-2); margin-bottom: .9rem; }
+
+    .module-chip {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-size: .76rem; font-weight: 600;
+      color: #002455; background: var(--bleu-pale);
+      padding: .28rem .7rem; border-radius: var(--radius-sm);
+    }
+    [data-theme="dark"] .module-chip { color: var(--bleu); background: rgba(91,159,239,.12); }
+
+    /* ════════════════════════════════════════
+       CHAÎNES
+    ════════════════════════════════════════ */
+    .chains { display: flex; flex-direction: column; gap: 1rem; }
+
+    .chain-card {
+      background: var(--surface); border-radius: var(--radius);
+      padding: 1.3rem 1.6rem; box-shadow: var(--ombre);
+      border: 1px solid var(--bordure);
+      display: grid; grid-template-columns: 2.5rem 1fr;
+      gap: 0 1rem; align-items: start; transition: box-shadow .2s;
+    }
+    .chain-card:hover { box-shadow: var(--ombre-md); }
+
+    .chain-icon {
+      width: 2.5rem; height: 2.5rem;
+      background: var(--bleu-pale); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; margin-top: .1rem;
+    }
+    [data-theme="dark"] .chain-icon { background: rgba(91,159,239,.12); }
+
+    .chain-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: .93rem; color: var(--texte); margin-bottom: .2rem; }
+    .chain-desc { font-size: .83rem; color: var(--texte-2); margin-bottom: .6rem; }
+    .chain-steps { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+
+    /* Step tags */
+    .step-tag {
+      font-family: 'Poppins', sans-serif; font-size: .73rem; font-weight: 700;
+      padding: .22rem .6rem; border-radius: 5px;
+      background: #002455; color: #fff;
+    }
+    /* Step tags EVFC */
+    .step-tag.evfc-e { background: var(--evfc-e); }
+    .step-tag.evfc-v { background: var(--evfc-v); }
+    .step-tag.evfc-f { background: var(--evfc-f); }
+    .step-tag.evfc-c { background: var(--evfc-c); }
+
+    .chain-arrow { color: var(--texte-2); font-size: .85rem; }
+
+    /* ════════════════════════════════════════
+       DÉMARRER
+    ════════════════════════════════════════ */
+    .steps { display: flex; flex-direction: column; gap: 1rem; }
+
+    .step-item {
+      background: var(--surface); border-radius: var(--radius);
+      padding: 1.4rem 1.6rem; box-shadow: var(--ombre);
+      border: 1px solid var(--bordure);
+      display: flex; gap: 1.3rem; align-items: flex-start;
+    }
+
+    .step-num {
+      width: 2.2rem; height: 2.2rem; flex-shrink: 0;
+      background: #002455; color: #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Poppins', sans-serif; font-weight: 800; font-size: .9rem;
+    }
+
+    .step-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: .95rem; color: var(--texte); margin-bottom: .35rem; }
+    .step-desc { font-size: .875rem; color: var(--texte-2); }
+
+    code {
+      background: var(--bleu-pale); color: #002455;
+      border-radius: 5px; padding: .1em .45em; font-size: .85em;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+    }
+    [data-theme="dark"] code { background: rgba(91,159,239,.15); color: var(--bleu); }
+
+    .prompt-box {
+      margin-top: .8rem; background: var(--fond-alt);
+      border-left: 3px solid #F0322C;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: .9rem 1.1rem; font-size: .85rem;
+      color: var(--texte-2); font-style: italic;
+    }
+
+    .callout {
+      margin-top: 2rem; background: var(--surface);
+      border: 1px solid var(--bordure);
+      border-left: 4px solid #002455;
+      border-radius: var(--radius); padding: 1.3rem 1.5rem;
+      box-shadow: var(--ombre); display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .callout-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .callout strong { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: .93rem; color: var(--texte); display: block; margin-bottom: .3rem; }
+    .callout p { font-size: .875rem; color: var(--texte-2); }
+
+    /* ════════════════════════════════════════
+       CONTACT + FOOTER
+    ════════════════════════════════════════ */
+    .contact-section {
+      background: linear-gradient(135deg, #002455 0%, #061A33 100%);
+      color: #fff; text-align: center; padding: 4.5rem 2.5rem;
+    }
+    .contact-section .section-title { color: #fff; margin-bottom: .6rem; }
+    .contact-section .section-label { color: rgba(240,50,44,.85); }
+    .contact-section p { color: rgba(255,255,255,.65); margin-bottom: 2rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    footer {
+      background: #040D1A; color: rgba(255,255,255,.45);
+      text-align: center; padding: 1.5rem 1rem; font-size: .82rem;
+      display: flex; align-items: center; justify-content: center; gap: .6rem; flex-wrap: wrap;
+    }
+    .footer-logo-wrap {
+      background: #fff;
+      border-radius: 6px;
+      padding: 3px 8px;
+      display: inline-flex; align-items: center;
+    }
+    .footer-logo-img { height: 22px; width: auto; display: block; }
+    footer strong { color: rgba(255,255,255,.7); }
+    footer a { color: #F0322C; }
+    footer a:hover { color: #FF6B67; }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════ */
+    @media (max-width: 700px) {
+      nav ul { display: none; }
+      nav { padding: .8rem 1.2rem; }
+      .hero { padding: 4rem 1.5rem 3.5rem; }
+      section { padding: 3.5rem 1.5rem; }
+      .module-card.featured { flex-direction: column; }
+      .module-card.featured .module-header {
+        flex-direction: row; border-right: none;
+        border-bottom: 1px solid var(--bordure); min-width: unset;
+      }
+      .evfc-legend { width: 100%; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ════ NAV ════ -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-wrap">
+      <img src="assets/logo-edumediapole.png"
+           alt="Édumédiapole" class="nav-logo-img">
+    </div>
+  </a>
+  <ul>
+    <li><a href="#methode">Méthode</a></li>
+    <li><a href="#modules">Modules</a></li>
+    <li><a href="#chaines">Chaînes</a></li>
+    <li><a href="#demarrer">Démarrer</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li>
+      <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <span id="themeLabel">Sombre</span>
+      </button>
+    </li>
+  </ul>
+</nav>
+
+
+<!-- ════ HERO ════ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Pack FPA · v3.1 · Édumédiapole 2026</div>
+    <h1>Concevez des formations FPA<br>percutantes <em>avec l'IA</em></h1>
+    <p class="hero-sub">
+      Un écosystème de 9 skills Claude Cowork pour concevoir, animer et évaluer
+      des formations professionnelles selon la méthode
+      <strong><span class="ph-e">E</span><span class="ph-v">V</span><span class="ph-f">F</span><span class="ph-c">C</span></strong>.
+    </p>
+    <div class="hero-ctas">
+      <a href="pack-evfc-fpa.plugin" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Télécharger le plugin
+      </a>
+      <a href="#demarrer" class="btn btn-ghost">Démarrer en 5 min →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">9</div>
+        <div class="stat-label">Skills IA</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="evfc-dots">
+          <span style="background:var(--evfc-e)"></span>
+          <span style="background:var(--evfc-v)"></span>
+          <span style="background:var(--evfc-f)"></span>
+          <span style="background:var(--evfc-c)"></span>
+        </div>
+        <div class="stat-label">Phases EVFC</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5 min</div>
+        <div class="stat-label">Installation</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Français</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ MÉTHODE EVFC ════ -->
+<section id="methode">
+  <div class="section-inner">
+    <div class="section-label">Fondement pédagogique</div>
+    <h2 class="section-title">La méthode <span class="ph-e">E</span><span class="ph-v">V</span><span class="ph-f">F</span><span class="ph-c">C</span></h2>
+    <p class="section-sub">Quatre phases séquencées pour ancrer durablement les compétences chez l'adulte. L'action observable prime sur la théorie.</p>
+
+    <div class="evfc-grid">
+      <div class="evfc-card e">
+        <div class="evfc-letter">E</div>
+        <div class="evfc-word">Écouter</div>
+        <span class="evfc-pct">10 – 15 %</span>
+        <p class="evfc-desc">Contextualiser, donner du sens, ancrer dans le vécu professionnel de l'apprenant.</p>
+      </div>
+      <div class="evfc-card v">
+        <div class="evfc-letter">V</div>
+        <div class="evfc-word">Voir</div>
+        <span class="evfc-pct">20 – 25 %</span>
+        <p class="evfc-desc">Démontrer, rendre visible le geste professionnel avant que l'apprenant le pratique.</p>
+      </div>
+      <div class="evfc-card f">
+        <div class="evfc-letter">F</div>
+        <div class="evfc-word">Faire</div>
+        <span class="evfc-pct">45 – 55 %</span>
+        <p class="evfc-desc">Pratiquer en situation réelle ou simulée. L'action observable est le cœur de l'apprentissage.</p>
+      </div>
+      <div class="evfc-card c">
+        <div class="evfc-letter">C</div>
+        <div class="evfc-word">Consolider</div>
+        <span class="evfc-pct">10 – 15 %</span>
+        <p class="evfc-desc">Formaliser, transférer, mémoriser. Garantir le passage de la compétence vers le terrain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ MODULES ════ -->
+<section id="modules" class="section-bg-alt">
+  <div class="section-inner">
+    <div class="section-label">Écosystème de skills</div>
+    <h2 class="section-title">Les 9 modules du pack</h2>
+    <p class="section-sub">Chaque module est un skill Claude Cowork spécialisé. La couleur du badge indique la phase <span class="ph-e">E</span><span class="ph-v">V</span><span class="ph-f">F</span><span class="ph-c">C</span> de rattachement principal.</p>
+
+    <!-- Légende EVFC -->
+    <div class="evfc-legend">
+      <span class="legend-item"><span class="legend-dot" style="background:var(--evfc-e)"></span><span class="ph-e">Écouter</span></span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--evfc-v)"></span><span class="ph-v">Voir</span></span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--evfc-f)"></span><span class="ph-f">Faire</span></span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--evfc-c)"></span><span class="ph-c">Consolider</span></span>
+    </div>
+
+    <div class="modules-grid">
+
+      <!-- Orchestrateur — transversal, toutes phases -->
+      <div class="module-card featured">
+        <div class="module-header">
+          <span class="module-badge badge-bleu-nuit">ORCHESTRATEUR</span>
+          <span class="module-name">Architecte Formateur Augmenté</span>
+        </div>
+        <div class="module-body">
+          <p>Point d'entrée intelligent — qualifie votre besoin en 5 questions ciblées et vous route automatiquement vers le bon module. Produit un plan d'action avec tableau de mission et statuts.</p>
+          <span class="module-chip">⚙ Plan d'action + tableau de mission</span>
+        </div>
+      </div>
+
+      <!-- M_INTRO — phase Voir -->
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-badge badge-evfc-v">M_INTRO</span>
+          <span class="module-name">Simulateur EDC EVFC</span>
+        </div>
+        <div class="module-body">
+          <p>Point d'entrée pédagogique (phase <span class="ph-v">Voir</span>) pour les formateurs FPA débutants. Simulation guidée sur étude de cas fictive et annotée.</p>
+          <span class="module-chip">📋 Étude de cas annotée</span>
+        </div>
+      </div>
+
+      <!-- M0 — couvre toutes les phases (progression macro) -->
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-badge badge-bleu">M0</span>
+          <span class="module-name">Progression Pédagogique <span class="ph-e">E</span><span class="ph-v">V</span><span class="ph-f">F</span><span class="ph-c">C</span></span>
+        </div>
+        <div class="module-body">
+          <p>Transforme un référentiel brut en progression de N séances structurée, couverture des compétences vérifiée, prête à développer.</p>
+          <span class="module-chip">📅 Plan pédagogique global</span>
+        </div>
+      </div>
+
+      <!-- M1 — séquence EVFC complète (toutes phases) -->
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-badge badge-bleu">M1</span>
+          <span class="module-name">Sequence Designer <span class="ph-e">E</span><span class="ph-v">V</span><span class="ph-f">F</span><span class="ph-c">C</span></span>
+        </div>
+        <div class="module-body">
+          <p>Conçoit une séquence <span class="ph-e">E</span><span class="ph-v">V</span><span class="ph-f">F</span><span class="ph-c">C</span> complète — objectifs observables, activités, minutage par phase, gabarit prêt à l'emploi.</p>
+          <span class="module-chip">📄 Séquence 4 phases</span>
+        </div>
+      </div>
+
+      <!-- M2 — transversal (outils IA pour toutes phases) -->
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-badge badge-bleu-med">M2</span>
+          <span class="module-name">AI Training Designer</span>
+        </div>
+        <div class="module-body">
+          <p>Génère les prompts pédagogiques FPA et conçoit des formations IA adaptées à 7 publics. Grille de validation des outputs IA intégrée.</p>
+          <span class="module-chip">💡 7 familles de prompts</span>
+        </div>
+      </div>
+
+      <!-- M3 — phase Faire -->
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-badge badge-evfc-f">M3</span>
+          <span class="module-name">Scénario <span class="ph-f">FAIRE</span> Generator</span>
+        </div>
+        <div class="module-body">
+          <p>Produit des mises en situation ultra-réalistes pour la phase <span class="ph-f">Faire</span>, ancrées dans le secteur professionnel de l'apprenant.</p>
+          <span class="module-chip">🎭 3 scénarios contextualisés</span>
+        </div>
+      </div>
+
+      <!-- M4 — phase Consolider (QCM = évaluation = consolidation) -->
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-badge badge-evfc-c">M4</span>
+          <span class="module-name">QCM <span class="ph-e">E</span><span class="ph-v">V</span><span class="ph-f">F</span><span class="ph-c">C</span> Validator</span>
+        </div>
+        <div class="module-body">
+          <p>Valide un QCM au format CSV (alignement <span class="ph-e">E</span><span class="ph-v">V</span><span class="ph-f">F</span><span class="ph-c">C</span>, niveaux Bloom) et génère le Google Apps Script pour créer le formulaire automatiquement.</p>
+          <span class="module-chip">📊 CSV + Google Form + Script</span>
+        </div>
+      </div>
+
+      <!-- M5 — phase Consolider (grilles = évaluation = consolidation) -->
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-badge badge-evfc-c">M5</span>
+          <span class="module-name">Grilles Critériées</span>
+        </div>
+        <div class="module-body">
+          <p>Crée des grilles d'évaluation à 4 niveaux avec critères observables et mesurables pour la phase <span class="ph-c">Consolider</span> — directement utilisables sur le terrain.</p>
+          <span class="module-chip">📏 Grille évaluation critériée</span>
+        </div>
+      </div>
+
+      <!-- M6 — phase Écouter (ERA = Empathie = écouter l'apprenant) -->
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-badge badge-evfc-e">M6</span>
+          <span class="module-name">ERA Loop Coach</span>
+        </div>
+        <div class="module-body">
+          <p>Accompagne le formateur face aux blocages apprenant via la Boucle <strong>E.R.A.</strong> — <span class="ph-e">Empathie</span> → Résolution → Adhésion.</p>
+          <span class="module-chip">🔄 Fiche intervention ERA</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ CHAÎNES ════ -->
+<section id="chaines">
+  <div class="section-inner">
+    <div class="section-label">Utilisation recommandée</div>
+    <h2 class="section-title">Chaînes pédagogiques</h2>
+    <p class="section-sub">Combinez les modules selon votre besoin. La couleur de chaque tag rappelle la phase <span class="ph-e">E</span><span class="ph-v">V</span><span class="ph-f">F</span><span class="ph-c">C</span> du module.</p>
+
+    <!-- Légende compacte -->
+    <div class="evfc-legend">
+      <span class="legend-item"><span class="legend-dot" style="background:var(--evfc-e)"></span><span class="ph-e">Écouter</span></span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--evfc-v)"></span><span class="ph-v">Voir</span></span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--evfc-f)"></span><span class="ph-f">Faire</span></span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--evfc-c)"></span><span class="ph-c">Consolider</span></span>
+      <span class="legend-item"><span class="legend-dot" style="background:#002455"></span>Transversal</span>
+    </div>
+
+    <div class="chains">
+
+      <div class="chain-card">
+        <div class="chain-icon">🎯</div>
+        <div>
+          <div class="chain-title">Atelier de conception complet</div>
+          <div class="chain-desc">De la séquence au QCM final, en passant par scénarios et grilles.</div>
+          <div class="chain-steps">
+            <span class="step-tag">M1</span><span class="chain-arrow">→</span>
+            <span class="step-tag evfc-f">M3</span><span class="chain-arrow">→</span>
+            <span class="step-tag evfc-c">M5</span><span class="chain-arrow">→</span>
+            <span class="step-tag evfc-c">M4</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-card">
+        <div class="chain-icon">🌱</div>
+        <div>
+          <div class="chain-title">Parcours débutant FPA</div>
+          <div class="chain-desc">Comprendre l'écosystème EVFC avant de produire sa première séquence.</div>
+          <div class="chain-steps">
+            <span class="step-tag evfc-v">M_INTRO</span><span class="chain-arrow">→</span>
+            <span class="step-tag">M1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-card">
+        <div class="chain-icon">📚</div>
+        <div>
+          <div class="chain-title">Du référentiel au détail</div>
+          <div class="chain-desc">Partir d'un référentiel de formation et le décliner en séances opérationnelles.</div>
+          <div class="chain-steps">
+            <span class="step-tag">M0</span><span class="chain-arrow">→</span>
+            <span class="step-tag">M1</span><span class="chain-arrow">→</span>
+            <span class="step-tag evfc-f">M3</span><span class="chain-arrow">+</span>
+            <span class="step-tag evfc-c">M5</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-card">
+        <div class="chain-icon">🔧</div>
+        <div>
+          <div class="chain-title">Avec remédiation ERA</div>
+          <div class="chain-desc">Intégrer la remédiation quand des blocages apprenant sont anticipés.</div>
+          <div class="chain-steps">
+            <span class="step-tag">M1</span><span class="chain-arrow">→</span>
+            <span class="step-tag evfc-f">M3</span><span class="chain-arrow">→</span>
+            <span class="step-tag evfc-c">M5</span><span class="chain-arrow">→</span>
+            <span class="step-tag evfc-e">M6</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-card">
+        <div class="chain-icon">🚀</div>
+        <div>
+          <div class="chain-title">Parcours complet optimisé</div>
+          <div class="chain-desc">De la progression macro à la remédiation, avec intégration de l'IA pédagogique.</div>
+          <div class="chain-steps">
+            <span class="step-tag">M0</span><span class="chain-arrow">→</span>
+            <span class="step-tag">M1</span><span class="chain-arrow">→</span>
+            <span class="step-tag">M2</span><span class="chain-arrow">→</span>
+            <span class="step-tag evfc-f">M3</span><span class="chain-arrow">→</span>
+            <span class="step-tag evfc-c">M5</span><span class="chain-arrow">→</span>
+            <span class="step-tag evfc-e">M6</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ DÉMARRER ════ -->
+<section id="demarrer" class="section-bg-alt">
+  <div class="section-inner">
+    <div class="section-label">Prise en main</div>
+    <h2 class="section-title">Démarrer en 5 minutes</h2>
+    <p class="section-sub">Installation en 3 étapes, sans configuration. Pré-requis : Claude Pro + Claude Cowork desktop.</p>
+
+    <div class="steps">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Télécharger le fichier plugin</div>
+          <p class="step-desc">Cliquez sur <strong>Télécharger le plugin</strong> en haut de la page pour récupérer <code>pack-evfc-fpa.plugin</code>. Si vous êtes sur GitHub, cliquez sur le fichier puis sur <strong>Download raw file</strong>.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Installer dans Claude Cowork</div>
+          <p class="step-desc">Dans Cowork, allez dans <strong>Plugins → Install from file</strong>, sélectionnez le fichier téléchargé et cliquez sur <strong>Accept</strong>. Les 9 skills s'activent immédiatement.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Lancer l'orchestrateur</div>
+          <p class="step-desc">Dans Claude Cowork, tapez la phrase suivante :</p>
+          <div class="prompt-box">
+            « Je débute avec l'écosystème <span class="ph-e" style="font-style:normal">E</span><span class="ph-v" style="font-style:normal">V</span><span class="ph-f" style="font-style:normal">F</span><span class="ph-c" style="font-style:normal">C</span>. Je suis en formation FPA. Mon secteur : [votre secteur professionnel]. »
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-icon">📖</div>
+      <div>
+        <strong>Documents de cadrage (dossier <code>docs/</code>)</strong>
+        <p>Les PDFs approfondissent la méthode <span class="ph-e">E</span><span class="ph-v">V</span><span class="ph-f">F</span><span class="ph-c">C</span>, la Boucle E.R.A. et l'intégration IA. Ils ne sont pas nécessaires pour démarrer — consultez-les en parallèle de votre formation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ CONTACT ════ -->
+<section id="contact" class="contact-section">
+  <div class="section-inner">
+    <div class="section-label">Support</div>
+    <h2 class="section-title">Une question ?</h2>
+    <p>Pour tout problème d'accès ou question sur les modules, contactez directement le concepteur du pack.</p>
+    <a href="mailto:mediapole971@gmail.com" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      mediapole971@gmail.com
+    </a>
+  </div>
+</section>
+
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-logo-wrap">
+    <img src="assets/logo-edumediapole.png" alt="Édumédiapole" class="footer-logo-img">
+  </div>
+  <span>Pack <span class="ph-e" style="font-size:.82rem">E</span><span class="ph-v" style="font-size:.82rem">V</span><span class="ph-f" style="font-size:.82rem">F</span><span class="ph-c" style="font-size:.82rem">C</span> — FPA · <strong>B.FERNON©2026</strong> · <a href="mailto:bfernon@edumediapole.net">bfernon@edumediapole.net</a></span>
+</footer>
+
+
+<!-- ════ SCRIPT TOGGLE THÈME ════ -->
+<script>
+  const html  = document.documentElement;
+  const btn   = document.getElementById('themeToggle');
+  const label = document.getElementById('themeLabel');
+
+  const saved = localStorage.getItem('edmp-theme');
+  if (saved) {
+    html.setAttribute('data-theme', saved);
+    label.textContent = saved === 'dark' ? 'Clair' : 'Sombre';
+  }
+
+  btn.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    label.textContent = next === 'dark' ? 'Clair' : 'Sombre';
+    localStorage.setItem('edmp-theme', next);
+  });
+</script>
+
+</body>
+</html>
