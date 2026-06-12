@@ -104,21 +104,26 @@ pack-evfc-fpa/
 ├── INSTALLATION.md            ← à créer (guide apprenant)
 │
 ├── docs/                      ← documentation de cadrage
-│   ├── cadrage-v3.1.pdf
+│   ├── cadrage-v3.2.pdf
 │   ├── referentiel-EVFC.pdf
 │   ├── guide-ERA.pdf
 │   └── referentiel-operationnel.pdf
 │
-├── skills/                    ← fichiers .skill des modules
-│   ├── M_INTRO-simulateur-edc-evfc.skill
-│   ├── M0-progression-pedagogique-evfc.skill
-│   ├── M1-evfc-sequence-designer.skill
-│   ├── M2-ai-training-designer.skill
-│   ├── M3-evfc-faire-scenario-generator.skill
-│   ├── M4-qcm-evfc-validator.skill
-│   ├── M5-grilles-criteriees.skill
-│   ├── M6-era-loop-coach.skill
-│   └── M7-n8n-automatisation.skill
+├── skills/                    ← modules principaux EVFC
+│   ├── orchestrateur-architecte-formateur-augmente/
+│   ├── INTRO-simulateur-edc-evfc/
+│   ├── M0-progression-pedagogique-evfc/
+│   ├── M1-evfc-sequence-designer/
+│   ├── M2-ai-training-designer/
+│   ├── M3-qcm-evfc-validator/
+│   ├── M4-evfc-faire-scenario-generator/
+│   ├── M5-grilles-criteriees/
+│   ├── M6-era-loop-coach/
+│   ├── M7-n8n-automatisation/
+│   └── _transverses/          ← skills utilitaires transversaux (v3.3)
+│       ├── pandoc-md-converter/
+│       ├── pdf-pedagogique-export/
+│       └── prompt-pedagogique-optimizer/
 │
 └── scripts/
     └── QCM-AppsScript.gs
@@ -165,7 +170,7 @@ Les fichiers passent dans la section **"Staged Changes"**.
 Dans le champ texte en haut du panneau Source Control, tape un message descriptif :
 
 ```
-Ajout structure initiale pack EVFC v3.1
+Ajout structure initiale pack EVFC v3.3
 ```
 
 Clique sur le bouton **"Commit"** (coche ✓).
@@ -184,7 +189,7 @@ Pour chaque mise à jour future (nouvelle version d'un skill, nouveau document) 
 
 1. Modifie ou remplace le fichier dans VS Code.
 2. Panneau Source Control → **Stage** les modifications.
-3. **Commit** avec un message clair (ex : `Mise à jour M3 evfc-faire-scenario v3.2`).
+3. **Commit** avec un message clair (ex : `Mise à jour M3 evfc-faire-scenario v3.3`).
 4. **Push**.
 
 > 💡 C'est ainsi que l'historique des versions se construit automatiquement dans GitHub.
