@@ -561,9 +561,22 @@
       background: var(--white);
       box-shadow: var(--shadow);
     }
-    .mini-screen img {
-      width: min(160px, 38vw);
+    .logo-frame {
+      width: min(260px, 60vw);
+      aspect-ratio: 1 / 1;
       margin: 1.4rem auto .4rem;
+      background: #fff;
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
     .mini-screen-body {
       padding: 1.2rem;
@@ -670,11 +683,21 @@
       gap: 2rem;
       align-items: center;
     }
-    .closing img {
-      width: min(180px, 100%);
+    .closing-badge-frame {
+      width: min(150px, 100%);
+      aspect-ratio: 1 / 1;
       background: #fff;
-      border-radius: 12px;
-      padding: 10px;
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .closing-badge {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
     .closing h2 {
       margin-bottom: .7rem;
@@ -1003,7 +1026,9 @@
           </div>
         </div>
         <div class="mini-screen">
-          <img src="edumediapole/formateur-augmente/images/logo_WebApp.png" alt="Logo Formateur Augmenté EVFC" />
+          <div class="logo-frame">
+            <img src="edumediapole/formateur-augmente/images/logo_WebApp.png" alt="Logo Formateur Augmenté EVFC" />
+          </div>
           <div class="mini-screen-body">
             <div class="mini-tile">M1<br><small>Séquence</small></div>
             <div class="mini-tile">M4<br><small>Scénarios</small></div>
@@ -1047,7 +1072,9 @@
 
     <section class="closing">
       <div class="section-inner closing-grid">
-        <img src="edumediapole/B.FERNON@2026_small_ss_fond.png" alt="Signature visuelle B. Fernon" />
+        <div class="closing-badge-frame">
+          <img class="closing-badge" src="edumediapole/formateur-augmente/images/Badge_Aligne_EVFC.png" alt="Badge méthode pédagogique Aligné EVFC" />
+        </div>
         <div>
           <h2>Concevez. Formez. <span style="color:var(--blue)">Émancipez.</span></h2>
           <p>
@@ -1066,7 +1093,7 @@
   <footer>
     <span>Édumédiapole · Pack EVFC-FPA · Formateur Augmenté · B.FERNON © 2026</span>
     <span>·</span>
-    <a href="mailto:mediapole971@gmail.com">mediapole971@gmail.com</a>
+    <a href="mailto:bfernon@edumediapole.net">bfernon@edumediapole.net</a>
   </footer>
 
   <script>
