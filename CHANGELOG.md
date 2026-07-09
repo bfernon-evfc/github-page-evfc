@@ -3,6 +3,25 @@
 Toutes les évolutions notables de la page EVFC sont documentées ici.
 Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/) — les entrées sont groupées par date.
 
+## 2026-07-09 — Formulaire pour le téléchargement du plugin
+
+### Modifié
+- Le bouton « Télécharger le plugin » ouvre désormais le formulaire
+  d'inscription EVFC (Google Forms) au lieu du lien placeholder temporaire.
+- Libellé du bouton changé en « Recevoir le plugin », avec une indication
+  sous le bouton précisant qu'il faut remplir le formulaire pour recevoir
+  gratuitement le pack-evfc-fpa complet (plugin + guides de référence).
+- Section Ressources (Référentiel EVFC v1.0, Guide ERA Édumédiapole, Cadrage
+  Pack EVFC v3.2) : les champs e-mail + webhook n8n (encore en placeholder,
+  non fonctionnel) sont remplacés par le même bouton « Recevoir le lien »
+  ouvrant directement le formulaire Google Forms du plugin — tous les
+  éléments téléchargeables sont désormais distribués via ce formulaire
+  unique.
+- Bouton « Télécharger » de la carte tarif/pack renommé en « Recevoir le
+  plugin » pour la même cohérence.
+- Suppression du code mort associé (`requestDoc`, `requestReferentiel`,
+  `requestGuide`, `requestCadrage`).
+
 ## 2026-07-08 — Diffusion contrôlée des ressources
 
 ### Modifié
