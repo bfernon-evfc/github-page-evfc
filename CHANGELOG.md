@@ -2,6 +2,26 @@
 
 Toutes les évolutions notables de la page EVFC sont documentées ici.
 Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/) — les entrées sont groupées par date.
+Convention projet : lorsqu'une session de modifications est réalisée depuis ce projet Codex, ajouter la mention **« Mis à jour avec Codex »** dans le titre de la session.  
+Convention projet : lorsqu'une session de modifications est réalisée depuis ce projet Claude Code, ajouter la mention **« Mis à jour avec Claude »** dans le titre de la session. 
+
+## 2026-07-10 — Mise à jour des skills et modules (Mis à jour avec Claude)
+
+### Modifié
+
+- KPI « Skills du pack » : 13 skills (valeur définitive, conforme à la liste
+  officielle des 13 skills du plugin).
+- Carte « Sans installation, 100% dans le navigateur » déplacée de la section
+  Pack EVFC-FPA vers la section Application web (Formateur Augmenté EVFC),
+  en carte pleine largeur avec icône.
+- Grille de modules sous le logo Formateur Augmenté (section Application web)
+  mise à jour avec les vrais noms des modules récupérés depuis le site en
+  ligne : INTRO, M0 à M7, ainsi que PDF/DOCX/API, chaque tuile recolorée avec
+  la couleur réelle de son module pour un rendu plus lisible en clair/sombre.
+- Grille des skills de la section Pack EVFC-FPA reconstruite avec la liste
+  définitive des 13 skills du plugin (nom + fonction) ; la tuile
+  « N8N — Automatisation n8n » a été retirée de l'affichage (12 tuiles
+  visibles, le compteur reste à 13 skills).
 
 ## 2026-07-09 — Formulaire pour le téléchargement du plugin
 
