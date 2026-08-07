@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk '{print NR\": \"length\\($0\\)}' index.html)",
+      "Bash(grep -o 'grid-template-columns:repeat\\(2,1fr\\);gap:12px;margin-bottom:28px\\\\\\\\\">.\\\\{3500\\\\}' /tmp/evfc_live.html)",
+      "Read(//tmp/**)",
+      "Bash(grep -o '.\\\\{100\\\\}Application web.\\\\{3000\\\\}' /tmp/evfc_live.html | head -c 5000)",
+      "Bash(grep -o '\"M[0-7][^\"]\\\\{0,80\\\\}\"' /tmp/evfc_live.html | sort -u | head -40 *)",
+      "Bash(grep -o \"id: 'M[0-7][^}]\\\\{0,400\\\\}\" /tmp/evfc_live.html | head -20)",
+      "Bash(grep -o \"INTRO', name:.\\\\{0,600\\\\}\" /tmp/evfc_live.html | head -3)",
+      "Bash(grep -o \"id: 'm[0-9]', name: '[^']*', shortName: '[^']*',\\\\\\\\\\\\\\\\n *desc: \\\\\\\\\\\\\\\\\\\\\"[^\\\\\\\\\\\\\\\\]*\\\\\\\\\\\\\\\\\\\\\"\" /tmp/evfc_live.html)",
+      "Bash(grep -o \"id: 'm[0-9]'.\\\\{0,300\\\\}\" /tmp/evfc_live.html)",
+      "Bash(grep -o 'padding:22px;display:grid;grid-template-columns:repeat\\(3,1fr\\);gap:12px\\\\\\\\\">.\\\\{2600\\\\}<\\\\\\\\\\\\\\\\u002Fdiv>\\\\\\\\\\\\\\\\n      <\\\\\\\\\\\\\\\\u002Fdiv>\\\\\\\\\\\\\\\\n    <\\\\\\\\\\\\\\\\u002Fdiv>\\\\\\\\\\\\\\\\n  <\\\\\\\\\\\\\\\\u002Fsection>' index.html)",
+      "Bash(grep -bo 'font-size:10px;color:var\\(--text-muted\\);margin-top:4px\\\\\\\\\">Claude' index.html)"
+    ]
+  }
+}
